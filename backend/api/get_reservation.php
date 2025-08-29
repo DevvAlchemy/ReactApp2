@@ -1,6 +1,5 @@
 <?php
 /**
- * Get Single Reservation Endpoint
  * This fetches one specific reservation by ID
  */
 

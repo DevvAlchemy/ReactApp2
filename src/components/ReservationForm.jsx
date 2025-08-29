@@ -1,4 +1,3 @@
-// src/components/ReservationForm.jsx
 import React, { useState } from 'react';
 
 const ReservationForm = () => {

@@ -1,7 +1,6 @@
 <?php
 /**
  * CORS Configuration for Reservations App
- * Centralized and flexible CORS handling
  */
 
 class CorsHandler {
@@ -17,14 +16,20 @@ class CorsHandler {
     public function handleCors() {
         $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
         
-        // Check if origin is allowed
-        if (in_array($origin, $this->allowedOrigins)) {
-            header('Access-Control-Allow-Origin: ' . $origin);
+        // Check if origin is allowed OR if no origin header (for development)
+        if (in_array($origin, $this->allowedOrigins) || empty($origin)) {
+            // If we have a valid origin, use it; otherwise use wildcard for development
+            if (!empty($origin) && in_array($origin, $this->allowedOrigins)) {
+                header('Access-Control-Allow-Origin: ' . $origin);
+            } else {
+                // For development when HTTP_ORIGIN is missing
+                header('Access-Control-Allow-Origin: http://localhost:3000');
+            }
         }
         
         header('Access-Control-Allow-Methods: ' . implode(', ', $this->allowedMethods));
         header('Access-Control-Allow-Headers: ' . implode(', ', $this->allowedHeaders));
-        header('Access-Control-Max-Age: 86400'); // Cache preflight for 24 hours
+        header('Access-Control-Max-Age: 86400');
         
         // Handle preflight OPTIONS requests
         if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {

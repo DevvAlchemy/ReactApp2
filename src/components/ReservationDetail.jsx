@@ -1,4 +1,3 @@
-// src/components/ReservationDetail.jsx
 import React, { useState, useEffect } from 'react';
 
 const ReservationDetail = ({ reservationId, navigateTo }) => {

@@ -1,6 +1,5 @@
 <?php
 /**
- * 
  * This fetches all reservations from the database
  */
 

@@ -1,12 +1,21 @@
 <?php
 /**
- * Create Reservation Endpoint
  * This handles POST requests from  React form
  */
 
 // Include configuration files (handles CORS)
+
 require_once('../config/config.php');
 require_once('../config/database.php');
+
+//Debug for Error 500
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Log what we receive
+error_log("POST data received: " . file_get_contents('php://input'));
+
 
 // Only allow POST requests for creating reservations
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
